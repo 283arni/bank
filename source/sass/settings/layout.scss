@@ -1,0 +1,36 @@
+html {
+  font-size: 16px;
+  font-family: $roboto;
+  font-weight: 400;
+  color: $font-main;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+a {
+  text-decoration: none;
+  transition: 0.3s;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    filter: blur(1px);
+  }
+}
+
+img {
+  max-width: 100%;
+  min-height: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1160px;
+}
