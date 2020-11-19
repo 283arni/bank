@@ -1,0 +1,15 @@
+//settings
+@import "./settings/normalize";
+@import "./settings/variables";
+@import "./settings/media";
+@import "./settings/layout";
+
+//blocks
+@import "./blocks/header";
+@import "../../node_modules/swiper/swiper-bundle";
+@import "./blocks/slider";
+@import "./blocks/services";
+@import "./blocks/calculator";
+
+
+

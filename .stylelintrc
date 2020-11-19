@@ -1,5 +1,12 @@
 {
-  "extends": "stylelint-config-htmlacademy",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true
+  },
+  "extends": "htmlacademy/es6",
   "rules": {
     "declaration-no-important": true,
     "indentation": [2, {"ignore": ["inside-parens"]}]

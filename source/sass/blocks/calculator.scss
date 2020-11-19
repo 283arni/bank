@@ -1,0 +1,690 @@
+.calculator__wrapper {
+  h2 {
+    font-weight: 700;
+    font-size: 41px;
+    margin: 0 0 57px 0;
+
+    @include tablets {
+      font-size: 32px;
+      margin-bottom: 35px;
+    }
+
+    @include phones {
+      font-size: 22px;
+      margin-bottom: 27px;
+    }
+  }
+
+  h3 {
+    font-weight: 500;
+    font-size: 22px;
+    margin: 0 0 26px 0;
+
+    @include tablets {
+      font-size: 18px;
+      margin-bottom: 22px;
+    }
+
+    @include phones {
+      font-size: 16px;
+      margin-bottom: 17px;
+    }
+  }
+
+  button,
+  input[type='range'] {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+}
+
+.calculator__main {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 58px;
+
+  @include tablets {
+    flex-direction: column;
+    margin-bottom: 56px;
+  }
+
+  @include phones {
+    margin-bottom: 44px;
+  }
+}
+
+.calculator__fields {
+  margin-right: 70px;
+
+  @include tablets {
+    margin: 0 0 31px 0;
+    width: 100%;
+  }
+
+  @include phones {
+    margin-bottom: 20px;
+  }
+}
+
+.calculator__step-one {
+  margin-bottom: 35px;
+
+  @include phones {
+    margin-bottom: 26px;
+  }
+
+  form {
+    width: 600px;
+
+    @include tablets {
+      width: 100%;
+    }
+  }
+}
+
+.calculator__step-wrapper {
+  width: 100%;
+  min-height: 60px;
+  position: relative;
+  border: 1px solid $font-main;
+  border-radius: 4px;
+  z-index: 20;
+  overflow: hidden;
+
+  input {
+    display: none;
+
+    &:checked + label {
+      z-index: 10;
+      font-weight: 500;
+    }
+  }
+
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    background: $pure-white;
+    text-align: center;
+    padding: 0 24px;
+    font-size: 16px;
+
+    @include phones {
+      padding: 0 14px;
+    }
+
+    &:first-of-type {
+      font-weight: 500;
+      border-bottom: 1px solid $font-main;
+    }
+
+    &:not(:first-of-type):not(:last-of-type) {
+      border-bottom: 1px solid $gray-border;
+    }
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 60px;
+    border: none;
+    background: transparent;
+    padding: 0 22px;
+    z-index: 15;
+
+    @include phones {
+      padding: 0 12px;
+    }
+
+    svg {
+      transform: rotate(0deg);
+      transition: 0.3s;
+    }
+  }
+
+  &.open {
+    label {
+      position: static;
+    }
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.calculator__step-two {
+  display: none;
+
+  h3 {
+    margin-bottom: 23px;
+
+    @include tablets {
+      margin-bottom: 20px;
+    }
+
+    @include phones {
+      margin-bottom: 14px;
+    }
+  }
+}
+
+.calculator__wrapper-two {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  label {
+    color: $gray-label;
+    margin-bottom: 11px;
+    display: block;
+  }
+
+  span {
+    font-size: 14px;
+    color: $gray;
+  }
+
+  input[type='text'] {
+    font-weight: 500;
+    font-size: 18px;
+    text-align: center;
+
+    @include phones {
+      font-size: 16px;
+    }
+
+    &::placeholder {
+      color: $font-main;
+    }
+  }
+
+  input[type='range'] {
+    // width: 600px;
+    appearance: none;
+    margin-bottom: 6px;
+
+    @include tablets {
+      margin-bottom: 5px;
+      width: 100%;
+    }
+
+    &::-webkit-slider-thumb {
+      appearance: none;
+      height: 13px;
+      width: 13px;
+      border-radius: 50%;
+      background: $purple;
+      cursor: pointer;
+    }
+
+    &::-moz-range-thumb {
+      appearance: none;
+      height: 14px;
+      width: 14px;
+      border-radius: 50%;
+      background: $purple;
+      cursor: pointer;
+      border: transparent;
+    }
+
+    &::-webkit-slider-runnable-track {
+      background: linear-gradient(transparent 6px, $gray-border 6px, $gray-border 8px, transparent 8px);
+    }
+
+    &::-moz-range-track {
+      box-shadow: inset 0 -1px $gray-border;
+    }
+  }
+
+  input[type='checkbox'] {
+    display: none;
+
+    &:checked + label {
+      div {
+        background: $purple no-repeat center url('../img/mark-check.png');
+      }
+    }
+  }
+
+  label[for='mother-money']  {
+    display: flex;
+    cursor: pointer;
+
+    @include phones {
+      font-size: 14px;
+    }
+
+    div {
+      width: 16px;
+      height: 16px;
+      content: '';
+      border-radius: 2px;
+      border: 1px solid $purple;
+      margin-right: 8px;
+
+      &:hover {
+        opacity: 0.8;
+      }
+
+      &:active {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.calculator__sum {
+  margin-bottom: 24px;
+  width: 100%;
+
+  @include tablets {
+    // width: 100%;
+    margin-bottom: 19px;
+  }
+
+  @include phones {
+    margin-bottom: 14px;
+  }
+
+  span {
+    letter-spacing: 0.01em;
+  }
+}
+
+.calculator__sum-wrapper {
+  border-radius: 4px;
+  border: 1px solid $font-main;
+  // width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+
+  @include tablets {
+    // width: 100%;
+  }
+
+  input,
+  button {
+    border: none;
+    padding: 0;
+  }
+
+  button {
+    position: relative;
+    background: transparent;
+    width: 60px;
+    height: 100%;
+
+    &:first-of-type {
+      &::after {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        width: 16px;
+        height: 2px;
+        content: '';
+        background: $font-main;
+        transform: translate(-50%, -50%);
+
+        @include phones {
+          left: 58%;
+        }
+      }
+    }
+
+    &:last-of-type {
+      &::after {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        width: 16px;
+        height: 2px;
+        content: '';
+        background: $font-main;
+        transform: translate(-50%, -50%);
+
+        @include phones {
+          left: 58%;
+        }
+      }
+
+      &::before {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        width: 2px;
+        height: 16px;
+        content: '';
+        background: $font-main;
+        transform: translate(-50%, -50%);
+
+        @include phones {
+          left: 58%;
+        }
+      }
+    }
+  }
+
+  input {
+    font-weight: 500;
+    font-size: 18px;
+    height: 100%;
+    flex: 1;
+  }
+}
+
+.calculator__piece,
+.calculator__years {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  width: 100%;
+
+  @include tablets {
+    // width: 100%;
+    margin-bottom: 20px;
+  }
+
+  @include phones {
+    margin-bottom: 16px;
+  }
+
+  input[type="text"] {
+    border-radius: 4px;
+    border: 1px solid $font-main;
+    // width: 600px;
+    // width: 100%;
+    height: 60px;
+    margin-bottom: 14px;
+
+    @include tablets {
+      // width: 100%;
+    }
+  }
+}
+
+.calculator__years-limit {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.calculator__offer {
+  display: none;
+  width: 500px;
+  padding: 60px 58px;
+  background: $white;
+  border-radius: 4px;
+
+  @include tablets {
+    width: 100%;
+    padding: 55px 60px 61px 60px;
+  }
+
+  @include phones {
+    padding: 36px 15px 41px 15px;
+  }
+
+  h3 {
+    margin-bottom: 30px;
+
+    @include tablets {
+      font-size: 22px;
+    }
+
+    @include phones {
+      font-size: 18px;
+      margin-bottom: 28px;
+    }
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 6px;
+
+    @include tablets {
+      justify-content: flex-start;
+    }
+
+    @include phones {
+      margin-bottom: 14px;
+    }
+  }
+
+  li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 31px;
+
+    @include phones {
+      margin-bottom: 18px;
+    }
+
+    &:nth-child(odd) {
+      width: 46%;
+
+      @include tablets {
+        width: 41%;
+      }
+
+      @include phones {
+        width: 100%;
+      }
+    }
+
+    &:nth-child(even) {
+      width: 41%;
+
+      @include phones {
+        width: 100%;
+      }
+    }
+
+    span {
+      &:first-of-type {
+        font-weight: 500;
+        font-size: 22px;
+        margin-bottom: 7px;
+
+        @include phones {
+          font-size: 18px;
+          margin-bottom: 5px;
+        }
+      }
+
+      &:last-of-type {
+        color: $gray-label;
+      }
+    }
+  }
+
+  button {
+    color: $white;
+    background: $blue;
+    width: 100%;
+    text-align: center;
+    font-weight: 500;
+    border: transparent;
+    border-radius: 4px;
+    padding: 16px 0;
+    cursor: pointer;
+
+    @include phones {
+      font-size: 14px;
+      padding: 17px 0;
+    }
+  }
+}
+
+.calculator__request {
+  display: none;
+  margin: 0 auto;
+  background: $white;
+  padding: 65px 69px 69px 71px;
+  width: 770px;
+
+  @include tablets {
+    padding: 0;
+    width: 100%;
+    background: transparent;
+  }
+
+  h3 {
+    margin: 0 0 28px 0;
+    text-align: center;
+
+    @include tablets {
+      margin-bottom: 42px;
+    }
+
+    @include phones {
+      margin-bottom: 38px;
+    }
+  }
+
+  ul {
+    list-style: none;
+    margin: 0 0 30px 0;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid $gray-bb;
+    padding-bottom: 17px;
+
+    @include phones {
+      flex-direction: column;
+      align-items: flex-start;
+      padding-bottom: 16px;
+    }
+
+    &:not(:first-of-type) {
+      padding-top: 12px;
+
+      @include phones {
+        padding-top: 16px;
+      }
+    }
+  }
+
+  span {
+    &:first-of-type {
+      color: $gray-label;
+
+      @include phones {
+        order: 2;
+      }
+    }
+
+    &:last-of-type {
+      font-weight: 500;
+      font-size: 22px;
+
+      @include phones {
+        order: 1;
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+
+  form  {
+    text-align: center;
+  }
+
+  button {
+    font-weight: 500;
+    width: 31%;
+    color: $white;
+    border: transparent;
+    background: $blue;
+    padding: 17px 0;
+    border-radius: 4px;
+
+    @include tablets {
+      width: 100%;
+    }
+
+    @include phones {
+      font-size: 14px;
+    }
+  }
+}
+
+.calculator__request-fields {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+
+  @include phones {
+    margin-bottom: 30px;
+  }
+
+  input {
+    background: transparent;
+    border: 1px solid $font-main;
+    border-radius: 4px;
+    padding: 19px 24px;
+    font-size: 18px;
+
+    @include phones {
+      padding: 19px 14px;
+    }
+
+    &::placeholder {
+      font-size: 18px;
+      letter-spacing: 0.03em;
+
+      @include phones {
+        font-size: 16px;
+      }
+    }
+  }
+
+  input[type='text'] {
+    width: 100%;
+    margin-bottom: 30px;
+
+    @include phones {
+      margin-bottom: 20px;
+    }
+  }
+
+  input[type='tel'],
+  input[type='email'] {
+    width: 47.6%;
+
+    @include phones {
+      width: 100%;
+    }
+  }
+
+  input[type='tel'] {
+    @include phones {
+      margin-bottom: 20px;
+    }
+  }
+}

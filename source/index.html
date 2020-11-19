@@ -2,12 +2,310 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Сайт по предоставлению банковских услуг ЛИГА банк">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Стартовый шаблон</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Лига банк</title>
+  <link rel="preload stylesheet"  href="css/fonts-style.css" as="style">
+  <link rel="stylesheet" href="css/style.min.css">
 </head>
 <body>
-  <h1>Добро пожаловать в Лигу А.</h1>
+  <header class="header">
+    <div class="container header__wrapper">
+      <a class="header__logo">
+        <svg width="28" height="25">
+          <use xlink:href="img/sprite_auto.svg#logo"></use>
+        </svg>
+        <svg width="112" height="16">
+          <use xlink:href="img/sprite_auto.svg#logo-name"></use>
+        </svg>
+      </a>
+      <div class="header__nav">
+        <input type="checkbox" id="menu-button">
+        <label for="menu-button">
+          <span></span>
+        </label>
+        <nav>
+          <ul>
+            <li><a href="#">Услуги</a></li>
+            <li><a href="#">Рассчитать кредит</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Задать вопрос</a></li>
+          </ul>
+        </nav>
+      </div>
+      <button type="button">
+        <svg width="20" height="22">
+          <use xlink:href="img/sprite_auto.svg#entrance"></use>
+        </svg>
+        <span>Войти в Интернет-банк</span>
+      </button>
+    </div>
+  </header>
+  <main>
+    <h1 hidden>Лига банк</h1>
+    <section class="slider swiper-container">
+      <ul class="swiper-wrapper">
+        <li class="swiper-slide">
+          <div class="slider__slid slider__slid_first">
+            <h2>Лига Банк</h2>
+            <p>Кредиты на любой случай</p>
+            <a href="#">Рассчитать кредит</a>
+          </div>
+        </li>
+        <li class="swiper-slide">
+          <div class="slider__slid slider__slid_second">
+            <h2>Лига Банк</h2>
+            <p>Ваша уверенность в завтрашнем дне</p>
+          </div>
+        </li>
+        <li class="swiper-slide">
+          <div class="slider__slid slider__slid_third">
+            <h2>Лига Банк</h2>
+            <p>Всегда рядом</p>
+            <a href="#">Найти отделение</a>
+          </div>
+        </li>
+      </ul>
+      <div class="slider__pagination swiper-pagination"></div>
+    </section>
+    <section class="services">
+      <div class="services__wrapper container">
+        <form>
+          <input type="radio" name="tab" id="tabs-1" checked>
+          <label for="tabs-1" tabindex="0">
+            <svg width="34" height="33">
+              <use xlink:href="img/sprite_auto.svg#vault"></use>
+            </svg>
+            Вклады
+          </label>
+          <input type="radio" name="tab" id="tabs-2">
+          <label for="tabs-2" tabindex="0">
+            <svg width="34" height="30">
+              <use xlink:href="img/sprite_auto.svg#cards"></use>
+            </svg>
+            Кредиты
+          </label>
+          <input type="radio" name="tab" id="tabs-3">
+          <label for="tabs-3" tabindex="0">
+            <svg width="28" height="34">
+              <use xlink:href="img/sprite_auto.svg#security"></use>
+            </svg>
+            Страхование
+          </label>
+          <input type="radio" name="tab" id="tabs-4">
+          <label for="tabs-4" tabindex="0">
+            <svg width="20" height="34">
+              <use xlink:href="img/sprite_auto.svg#cell"></use>
+            </svg>
+            Онлайн-сервисы
+          </label>
+          <ul>
+            <li>
+              <div class="services__item services__item_invest swiper-slide">
+                <div class="services__info">
+                  <h2>Вклады Лига Банка – это выгодная инвестиция в свое будущее</h2>
+                  <ul>
+                    <li>Проценты по вкладам до 7%</li>
+                    <li>Разнообразные условия</li>
+                    <li>Возможность ежемесячной капитализации или вывод процентов на банковскую карту</li>
+                  </ul>
+                  <button>Узнать подробнее</button>
+                </div>
+                <picture>
+                  <source media="(max-width: 767px)" srcset="img/piggybank-phone.webp 1x, img/piggybank-phone@2x.webp 2x" type="image/webp">
+                  <source media="(max-width: 1023px)" srcset="img/piggybank-tablet.webp 1x, img/piggybank-tablet@2x.webp 2x" type="image/webp">
+                  <source media="(min-width: 1024px)" srcset="img/piggybank.webp 1x, img/piggybank@2x.webp 2x" type="image/webp">
+                  <!-- 1х: 440px; 2x: 880px -->
+                  <img src="img/piggybank.jpg" srcset="img/piggybank@2x.jpg 2x" width="440" height="290" alt="Инвестиционная копилка">
+                </picture>
+              </div>
+            </li>
+            <li>
+              <div class="services__item services__item_credit swiper-slide">
+                <div class="services__info">
+                  <h2>Лига Банк выдает кредиты под любые цели</h2>
+                  <ul>
+                    <li>Ипотечный кредит</li>
+                    <li>Автокредит</li>
+                    <li>Потребительский кредит</li>
+                  </ul>
+                  <p>Рассчитайте ежемесячный платеж и ставку по кредиту воспользовавшись нашим <a href="#">кредитным калькулятором</a></p>
+                </div>
+                <picture>
+                  <source media="(max-width: 767px)" srcset="img/car-phone.webp 1x, img/car-phone@2x.webp 2x" type="image/webp">
+                  <source media="(max-width: 1023px)" srcset="img/car-tablet.webp 1x, img/car-tablet@2x.webp 2x" type="image/webp">
+                  <source media="(min-width: 1024px)" srcset="img/car.webp 1x, img/car@2x.webp 2x" type="image/webp">
+                  <!-- 1х: 440px; 2x: 880px -->
+                  <img src="img/car.jpg" srcset="img/car@2x.jpg 2x" width="440" height="290" alt="Кредитование">
+                </picture>
+              </div>
+            </li>
+            <li>
+              <div class="services__item services__item_insurance swiper-slide">
+                <div class="services__info">
+                  <h2>Лига Страхование — застрахуем все что захотите</h2>
+                  <ul>
+                    <li>Автомобильное страхование</li>
+                    <li>Страхование жизни и здоровья</li>
+                    <li>Страхование недвижимости</li>
+                  </ul>
+                  <button>Узнать подробнее</button>
+                </div>
+                <picture>
+                  <source media="(max-width: 767px)" srcset="img/lock-phone.webp 1x, img/lock-phone@2x.webp 2x" type="image/webp">
+                  <source media="(max-width: 1023px)" srcset="img/lock-tablet.webp 1x, img/lock-tablet@2x.webp 2x" type="image/webp">
+                  <source media="(min-width: 1024px)" srcset="img/lock.webp 1x, img/lock@2x.webp 2x" type="image/webp">
+                  <!-- 1х: 440px; 2x: 880px -->
+                  <img src="img/lock.png" srcset="img/lock@2x.png 2x" width="440" height="290" alt="Страхование">
+                </picture>
+              </div>
+            </li>
+            <li>
+              <div class="services__item services__item_mobile swiper-slide">
+                <div class="services__info">
+                  <h2>Лига Банк — это огромное количество онлайн-сервисов для вашего удобства</h2>
+                  <ul>
+                    <li>Мобильный банк, который всегда под рукой</li>
+                    <li>Приложение Лига-проездной позволит вам оплачивать билеты по всему миру</li>
+                  </ul>
+                  <button>Узнать подробнее</button>
+                </div>
+                <picture>
+                  <source media="(max-width: 767px)" srcset="img/cell-phone.webp 1x, img/cell-phone@2x.webp 2x" type="image/webp">
+                  <source media="(max-width: 1023px)" srcset="img/cell-tablet.webp 1x, img/cell-tablet@2x.webp 2x" type="image/webp">
+                  <source media="(min-width: 1024px)" srcset="img/cell.webp 1x, img/cell@2x.webp 2x" type="image/webp">
+                  <!-- 1х: 440px; 2x: 880px -->
+                  <img src="img/cell.png" srcset="img/cell@2x.png 2x" width="440" height="290" alt="Мобильное приложение">
+                </picture>
+              </div>
+            </li>
+          </ul>
+          <div class="services__pagination swiper-pagination"></div>
+        </form>
+      </div>
+    </section>
+    <section class="calculator">
+      <div class="calculator__wrapper container">
+        <h2>Кредитный калькулятор</h2>
+        <div class="calculator__main">
+          <div class="calculator__fields">
+            <div class="calculator__step-one">
+              <h3>Шаг 1. Цель кредита</h3>
+              <form>
+                <div class="calculator__step-wrapper">
+                  <input type="radio" value="default" name="select-credit" id="option-1" checked>
+                  <label for="option-1">Выберите цель кредита</label>
+                  <input type="radio" value="house" name="select-credit" id="option-2">
+                  <label for="option-2">Ипотечное кредитование</label>
+                  <input type="radio" value="car" name="select-credit" id="option-3">
+                  <label for="option-3">Автомобильное кредитование</label>
+                  <input type="radio" value="credit" name="select-credit" id="option-4">
+                  <label for="option-4">Потребительский кредит</label>
+                  <button type="button">
+                    <svg width="20" height="11">
+                      <use xlink:href="img/sprite_auto.svg#arrow"></use>
+                    </svg>
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div class="calculator__step-two">
+              <h3>Шаг 2. Введите параметры кредита</h3>
+              <form>
+                <div class="calculator__wrapper-two">
+                  <div class="calculator__sum">
+                    <label for="sum">Стоимость недвижимости</label>
+                    <div class="calculator__sum-wrapper">
+                      <button type="button"></button>
+                      <input type="text" id="sum" placeholder="2 000 000 рублей">
+                      <button type="button"></button>
+                    </div>
+                    <span>От 1 200 000  до 25 000 000 рублей</span>
+                  </div>
+                  <div class="calculator__piece">
+                    <label for="first">Первоначальный взнос</label>
+                    <input type="text" id="first" name="first" placeholder="200 000 рублей">
+                    <input type="range" name="first">
+                    <span>10%</span>
+                  </div>
+                  <div class="calculator__years">
+                    <label for="years">Срок кредитования</label>
+                    <input type="text" name="years" id="years" placeholder="5 лет">
+                    <input type="range" name="years" id="range-years" min="5" max="30">
+                    <div class="calculator__years-limit">
+                      <span>5 лет</span>
+                      <span>30 лет</span>
+                    </div>
+                  </div>
+                  <input type="checkbox" name="mother-money" id="mother-money">
+                  <label for="mother-money">
+                    <div tabindex="0"></div> Использовать материнский капитал
+                  </label>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="calculator__offer">
+            <h3>Наше предложение</h3>
+            <ul>
+              <li>
+                <span id="info-sum">1 330 000 рублей</span>
+                <span>Сумма ипотеки</span>
+              </li>
+              <li>
+                <span id="info-pricent">9,40%</span>
+                <span>Процентная ставка</span>
+              </li>
+              <li>
+                <span id="info-piece">27 868 рублей</span>
+                <span>Ежемесячный платеж</span>
+              </li>
+              <li>
+                <span id="info-salary">61 929 рублей</span>
+                <span>Необходимый доход</span>
+              </li>
+            </ul>
+            <button type="button">Оформить заявку</button>
+          </div>
+        </div>
+        <div class="calculator__request">
+          <h3>Шаг 3. Оформление заявки</h3>
+          <ul>
+            <li>
+              <span>Номер заявки</span>
+              <span>№ 0010</span>
+            </li>
+            <li>
+              <span>Цель кредита</span>
+              <span>Ипотека</span>
+            </li>
+            <li>
+              <span>Стоимость недвижимости</span>
+              <span>2 000 000 рублей</span>
+            </li>
+            <li>
+              <span>Первоначальный взнос</span>
+              <span>200 000 рублей</span>
+            </li>
+            <li>
+              <span>Срок кредитования</span>
+              <span>5 лет</span>
+            </li>
+          </ul>
+          <form>
+            <div class="calculator__request-fields">
+              <input type="text" placeholder="ФИО" required>
+              <input type="tel" placeholder="Телефон" required>
+              <input type="email" placeholder="E-mail" required>
+            </div>
+            <button type="submit">Оформить заявку</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="js/vendor.js"></script>
+  <script src="js/script.js"></script>
 </body>
 </html>

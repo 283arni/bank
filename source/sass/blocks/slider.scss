@@ -1,0 +1,186 @@
+.slider {
+  width: 100%;
+  min-height: 400px;
+  margin-bottom: 59px;
+
+  @include tablets {
+    min-height: 300px;
+    margin-bottom: 0;
+  }
+
+  @include phones {
+    min-height: 226px;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  li {
+    height: 100%;
+  }
+}
+
+.slider__slid {
+  padding: 102px 0 114px 268px;
+
+  @include tablets {
+    padding: 65px 0 76px 85px;
+  }
+
+  @include phones {
+    padding: 38px 15px 47px 15px;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 54px;
+    margin: 0 0 10px 0;
+
+    @include tablets {
+      font-size: 46px;
+      margin-bottom: 7px;
+    }
+
+    @include phones {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+  }
+
+  p {
+    font-size: 22px;
+    margin: 0 0 35px 0;
+
+    @include tablets {
+      font-size: 18px;
+      margin-bottom: 32px;
+    }
+
+    @include phones {
+      font-size: 16px;
+      margin-bottom: 26px;
+    }
+  }
+
+  a {
+    display: inline-block;
+    vertical-align: middle;
+    color: $font-main;
+    background: $white;
+    font-weight: 500;
+    font-size: 18px;
+    padding: 16px 36px;
+    border-radius: 4px;
+
+    @include tablets {
+      font-size: 16px;
+      padding: 15px 31px;
+    }
+
+    @include phones {
+      font-size: 14px;
+      padding: 14px 31px;
+    }
+  }
+}
+
+.slider__slid_first {
+  color: $white;
+  background: no-repeat 75.8% 53% url('../img/cards.png'),
+              $blue no-repeat center/cover url('../img/bg-slid.png');
+
+  @include tablets {
+    background-size: 45%, auto;
+    background-position: 84% 53%, center;
+  }
+
+  @include phones {
+    background: $blue no-repeat right 58% url('../img/cards-phone.png');
+  }
+}
+
+.slider__slid_second {
+  padding-bottom: 166px;
+  background: no-repeat center bottom url('../img/men.jpg'),
+              linear-gradient(to right, $light-gray, $light-gray 35%, $pure-white);
+
+  @include tablets {
+    padding-bottom: 124px;
+    background-size: cover, auto;
+    background-position: 62% bottom;
+  }
+
+  @include phones {
+    padding-bottom: 73px;
+    background-position: 66% bottom;
+  }
+
+  p {
+    @include phones {
+      width: 50%;
+    }
+  }
+}
+
+.slider__slid_third {
+  background: $gray-blue no-repeat center bottom url('../img/girl.jpg');
+
+  @include tablets {
+    background-size: cover;
+    background-position: 51% bottom;
+  }
+
+  @include phones {
+    background-position: 63% bottom;
+  }
+
+  a {
+    color: $white;
+    background: $blue;
+    padding: 16px 48px;
+
+    @include tablets {
+      padding: 15px 38px;
+    }
+
+    @include phones {
+      padding: 14px 38px;
+    }
+  }
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: 36px;
+
+  @include tablets {
+    bottom: 12px;
+  }
+
+  @include phones {
+    bottom: 7px;
+  }
+
+  .swiper-pagination-bullet {
+    @include phones {
+      margin: 0 3px;
+    }
+  }
+}
+
+.swiper-pagination-bullet {
+  background: $purple;
+  opacity: 1;
+
+  @include phones {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+.swiper-pagination-bullet-active {
+  background: $light-gray;
+}

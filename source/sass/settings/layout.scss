@@ -4,6 +4,11 @@ html {
   font-weight: 400;
   color: $font-main;
   box-sizing: border-box;
+  min-height: 100vh;
+}
+
+body {
+  min-height: 100%;
 }
 
 *,
@@ -12,7 +17,7 @@ html {
   box-sizing: inherit;
 }
 
-a {
+a[href] {
   text-decoration: none;
   transition: 0.3s;
 
@@ -25,12 +30,15 @@ a {
   }
 }
 
-img {
-  max-width: 100%;
-  min-height: 100%;
-}
-
 .container {
   margin: 0 auto;
-  max-width: 1160px;
+  max-width: 1170px;
+
+  @include tablets {
+    max-width: 678px;
+  }
+
+  @include phones {
+    max-width: 290px;
+  }
 }
