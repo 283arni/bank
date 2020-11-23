@@ -217,30 +217,42 @@
                   <div class="calculator__sum">
                     <label for="sum">Стоимость недвижимости</label>
                     <div class="calculator__sum-wrapper">
-                      <button type="button"></button>
-                      <input type="text" id="sum" placeholder="2 000 000 рублей">
-                      <button type="button"></button>
+                      <button type="button" id="btn-minus"></button>
+                      <input type="text" id="sum" value="2 000 000 рублей" autocomplete="off" maxlength="11">
+                      <button type="button" id="btn-plus"></button>
                     </div>
                     <span>От 1 200 000  до 25 000 000 рублей</span>
                   </div>
-                  <div class="calculator__piece">
+                  <div class="calculator__piece" data-title="Потребительский кредит">
                     <label for="first">Первоначальный взнос</label>
-                    <input type="text" id="first" name="first" placeholder="200 000 рублей">
-                    <input type="range" name="first">
+                    <input type="text" id="first" name="first" value="200 000 рублей" autocomplete="off" maxlength="11">
+                    <input type="range" name="first" min="10" value="10" step="5">
                     <span>10%</span>
                   </div>
                   <div class="calculator__years">
                     <label for="years">Срок кредитования</label>
-                    <input type="text" name="years" id="years" placeholder="5 лет">
-                    <input type="range" name="years" id="range-years" min="5" max="30">
+                    <input type="text" name="years" id="years" value="5 лет" autocomplete="off" maxlength="2">
+                    <input type="range" name="years" id="range-years" min="5" max="30" value="5">
                     <div class="calculator__years-limit">
                       <span>5 лет</span>
                       <span>30 лет</span>
                     </div>
                   </div>
-                  <input type="checkbox" name="mother-money" id="mother-money">
-                  <label for="mother-money">
+                  <input type="checkbox" name="mother-money" id="mother-money" value="470000">
+                  <label for="mother-money" data-title="Ипотека" id="checkbox">
                     <div tabindex="0"></div> Использовать материнский капитал
+                  </label>
+                  <input type="checkbox" name="insurance" id="insurance">
+                  <label for="insurance" data-title="Автокредит" id="checkbox">
+                    <div tabindex="0"></div> КАСКО
+                  </label>
+                  <input type="checkbox" name="life-insurance" id="life-insurance">
+                  <label for="life-insurance" data-title="Автокредит" id="checkbox">
+                    <div tabindex="0"></div> Страхование жизни
+                  </label>
+                  <input type="checkbox" name="salary" id="salary">
+                  <label for="salary" data-title="Потребительский кредит" id="checkbox">
+                    <div tabindex="0"></div> Участник зарплатного проекта нашего банка
                   </label>
                 </div>
               </form>
@@ -254,7 +266,7 @@
                 <span>Сумма ипотеки</span>
               </li>
               <li>
-                <span id="info-pricent">9,40%</span>
+                <span id="info-percent">9,40%</span>
                 <span>Процентная ставка</span>
               </li>
               <li>
@@ -268,29 +280,33 @@
             </ul>
             <button type="button">Оформить заявку</button>
           </div>
+          <div class="calculator__back">
+            <p>Наш банк не выдаёт <span>ипотечные кредиты</span> меньше <span>200 000 рублей</span>.</p>
+            <p>Попробуйте использовать другие параметры для расчёта.</p>
+          </div>
         </div>
         <div class="calculator__request">
           <h3>Шаг 3. Оформление заявки</h3>
           <ul>
             <li>
               <span>Номер заявки</span>
-              <span>№ 0010</span>
+              <span id="request-id">№ 0010</span>
             </li>
             <li>
               <span>Цель кредита</span>
-              <span>Ипотека</span>
+              <span id="request-target">Ипотека</span>
             </li>
             <li>
-              <span>Стоимость недвижимости</span>
-              <span>2 000 000 рублей</span>
+              <span id="sum-title">Стоимость недвижимости</span>
+              <span id="request-sum">2 000 000 рублей</span>
             </li>
-            <li>
+            <li id="request-item">
               <span>Первоначальный взнос</span>
-              <span>200 000 рублей</span>
+              <span id="request-payment">200 000 рублей</span>
             </li>
             <li>
               <span>Срок кредитования</span>
-              <span>5 лет</span>
+              <span id="request-years">5 лет</span>
             </li>
           </ul>
           <form>
