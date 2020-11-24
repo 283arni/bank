@@ -50,7 +50,7 @@
           <div class="slider__slid slider__slid_first">
             <h2>Лига Банк</h2>
             <p>Кредиты на любой случай</p>
-            <a href="#">Рассчитать кредит</a>
+            <a href="#calculator">Рассчитать кредит</a>
           </div>
         </li>
         <li class="swiper-slide">
@@ -185,7 +185,7 @@
         </form>
       </div>
     </section>
-    <section class="calculator">
+    <section class="calculator" id="calculator">
       <div class="calculator__wrapper container">
         <h2>Кредитный калькулятор</h2>
         <div class="calculator__main">
@@ -196,11 +196,11 @@
                 <div class="calculator__step-wrapper">
                   <input type="radio" value="default" name="select-credit" id="option-1" checked="">
                   <label for="option-1">Выберите цель кредита</label>
-                  <input type="radio" value="house" name="select-credit" id="option-2">
+                  <input type="radio" value="Ипотека" name="select-credit" id="option-2">
                   <label for="option-2">Ипотечное кредитование</label>
-                  <input type="radio" value="car" name="select-credit" id="option-3">
+                  <input type="radio" value="Автокредит" name="select-credit" id="option-3">
                   <label for="option-3">Автомобильное кредитование</label>
-                  <input type="radio" value="credit" name="select-credit" id="option-4">
+                  <input type="radio" value="Потребительский кредит" name="select-credit" id="option-4">
                   <label for="option-4">Потребительский кредит</label>
                   <button type="button">
                     <svg width="20" height="11">
@@ -239,20 +239,20 @@
                     </div>
                   </div>
                   <input type="checkbox" name="mother-money" id="mother-money" value="470000">
-                  <label for="mother-money" data-title="Ипотека" id="checkbox">
-                    <div tabindex="0"></div> Использовать материнский капитал
+                  <label for="mother-money" data-title="Ипотека">
+                    <span tabindex="0"></span> Использовать материнский капитал
                   </label>
                   <input type="checkbox" name="insurance" id="insurance">
-                  <label for="insurance" data-title="Автокредит" id="checkbox">
-                    <div tabindex="0"></div> КАСКО
+                  <label for="insurance" data-title="Автокредит">
+                    <span tabindex="0"></span> КАСКО
                   </label>
                   <input type="checkbox" name="life-insurance" id="life-insurance">
-                  <label for="life-insurance" data-title="Автокредит" id="checkbox">
-                    <div tabindex="0"></div> Страхование жизни
+                  <label for="life-insurance" data-title="Автокредит">
+                    <span tabindex="0"></span> Страхование жизни
                   </label>
                   <input type="checkbox" name="salary" id="salary">
-                  <label for="salary" data-title="Потребительский кредит" id="checkbox">
-                    <div tabindex="0"></div> Участник зарплатного проекта нашего банка
+                  <label for="salary" data-title="Потребительский кредит">
+                    <span tabindex="0"></span> Участник зарплатного проекта нашего банка
                   </label>
                 </div>
               </form>
@@ -311,9 +311,9 @@
           </ul>
           <form>
             <div class="calculator__request-fields">
-              <input type="text" placeholder="ФИО" required="">
-              <input type="tel" placeholder="Телефон" required="">
-              <input type="email" placeholder="E-mail" required="">
+              <input type="text" placeholder="ФИО" pattern="^[a-zA-ZА-Яа-яЁё\s]+$" minlength="3" maxlength="30" required="">
+              <input type="tel" placeholder="Телефон" pattern="\+?[0-9\s\-\(\)]+" minlength="9" maxlength="12" required="">
+              <input type="email" placeholder="E-mail" minlength="5" maxlength="30" required="">
             </div>
             <button type="submit">Оформить заявку</button>
           </form>
@@ -321,6 +321,24 @@
       </div>
     </section>
   </main>
+
+
+  <template id="popup-thanks">
+    <div class="thanks">
+      <div class="thanks__wrapper">
+        <div class="thanks__close">
+          <button type="button">
+            <svg width="18" height="18">
+              <use xlink:href="img/sprite_auto.svg#close"></use>
+            </svg>
+          </button>
+        </div>
+        <h2>Спасибо за обращение в наш банк.</h2>
+        <p>Наш менеджер скоро свяжется с вами по указанному номеру телефона.</p>
+      </div>
+    </div>
+  </template>
+
   <script src="js/vendor.js"></script>
   <script src="js/script.js"></script>
 </body>

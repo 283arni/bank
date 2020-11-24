@@ -80,6 +80,15 @@
 'use strict';
 
 (function () {
+  var Year = {
+    ONE: 1,
+    FIVE: 5
+  };
+  var Divider = {
+    AFTER_THREE: 3,
+    AFTER_SIX: 6
+  };
+
   var returnClearValue = function returnClearValue(sum) {
     return parseInt(sum.split(" ").join(""), 10).toString();
   };
@@ -91,11 +100,11 @@
 
     year = returnClearValue(year);
 
-    if (+year === 1) {
+    if (+year === Year.ONE) {
       return "".concat(year, " \u0433\u043E\u0434");
     }
 
-    if (+year > 1 && +year < 5) {
+    if (+year > Year.ONE && +year < Year.FIVE) {
       return "".concat(year, " \u0433\u043E\u0434\u0430");
     }
 
@@ -109,12 +118,12 @@
 
     sum = returnClearValue(sum);
 
-    if (sum.length <= 6 && sum.length > 3) {
-      return "".concat(sum.substring(sum.length - 3, 0), " ").concat(sum.substring(sum.length - 3), " \u0440\u0443\u0431\u043B\u0435\u0439");
+    if (sum.length <= Divider.AFTER_SIX && sum.length > Divider.AFTER_THREE) {
+      return "".concat(sum.substring(sum.length - Divider.AFTER_THREE, 0), " ").concat(sum.substring(sum.length - Divider.AFTER_THREE), " \u0440\u0443\u0431\u043B\u0435\u0439");
     }
 
-    if (sum.length > 6) {
-      return "".concat(sum.substring(sum.length - 6, 0), " ").concat(sum.substring(sum.length - 3, sum.length - 6), " ").concat(sum.substring(sum.length - 3), " \u0440\u0443\u0431\u043B\u0435\u0439");
+    if (sum.length > Divider.AFTER_SIX) {
+      return "".concat(sum.substring(sum.length - Divider.AFTER_SIX, 0), " ").concat(sum.substring(sum.length - Divider.AFTER_THREE, sum.length - Divider.AFTER_SIX), " ").concat(sum.substring(sum.length - Divider.AFTER_THREE), " \u0440\u0443\u0431\u043B\u0435\u0439");
     }
 
     return "".concat(sum, " \u0440\u0443\u0431\u043B\u0435\u0439");
@@ -208,6 +217,81 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 'use strict';
 
 (function () {
+  var KeyButton = {
+    ESC: 27,
+    ESC_NAME: "Escape",
+    ENTER: 13,
+    ENTER_NAME: "Enter",
+    TAB: 9,
+    TAB_NAME: "Tab"
+  };
+  var body = document.querySelector("body");
+  var templateThanks = document.querySelector("#popup-thanks").content;
+  var cloneThanks = templateThanks.querySelector(".thanks").cloneNode(true);
+
+  var renderPopupThanks = function renderPopupThanks() {
+    body.classList.add("active-popup");
+    body.append(cloneThanks);
+    var popup = document.querySelector(".thanks");
+    var closeButton = popup.querySelector(".thanks__close button");
+
+    var closePopup = function closePopup() {
+      body.classList.remove("active-popup");
+      closeButton.removeEventListener("click", onClosePopupClick);
+      closeButton.removeEventListener("keydown", onButtonKeydown);
+      document.removeEventListener("keydown", onClosePopupKeydown);
+    };
+
+    var onButtonKeydown = function onButtonKeydown(e) {
+      e.preventDefault();
+
+      if (e.keyCode === KeyButton.TAB || e.key === KeyButton.TAB_NAME) {
+        closeButton.focus();
+      }
+
+      if (e.keyCode === KeyButton.ENTER || e.key === KeyButton.ENTER_NAME) {
+        closeButton.click();
+      }
+    };
+
+    var onClosePopupKeydown = function onClosePopupKeydown(e) {
+      if (e.keyCode === KeyButton.ESC || e.key === KeyButton.ESC_NAME) {
+        cloneThanks.remove();
+        closePopup();
+      }
+    };
+
+    var onClosePopupClick = function onClosePopupClick() {
+      cloneThanks.remove();
+      closePopup();
+    };
+
+    closeButton.addEventListener("click", onClosePopupClick);
+    closeButton.addEventListener("keydown", onButtonKeydown);
+    document.addEventListener("keydown", onClosePopupKeydown);
+    closeButton.focus();
+  };
+
+  window.popupThanks = {
+    renderPopupThanks: renderPopupThanks
+  };
+})();
+'use strict';
+
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+(function () {
+  var Numeral = {
+    FIRST_REQUEST: 1,
+    SECOND: 1000
+  };
+  var blockStepTwo = document.querySelector(".calculator__step-two");
+  var blockOffer = document.querySelector(".calculator__offer");
+  var defaultSelect = document.querySelector("#option-1");
   var requestContainer = document.querySelector(".calculator__request");
   var target = requestContainer.querySelector("#request-target");
   var requestId = requestContainer.querySelector("#request-id");
@@ -216,13 +300,64 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   var years = requestContainer.querySelector("#request-years");
   var sumTitle = requestContainer.querySelector("#sum-title");
   var itemRequest = requestContainer.querySelector("#request-item");
+  var submitButton = requestContainer.querySelector("button");
+  var name = requestContainer.querySelector("input[type='text']");
+  var inputs = requestContainer.querySelectorAll("input");
+  var number = Numeral.FIRST_REQUEST;
+  var renderPopupThanks = window.popupThanks.renderPopupThanks;
+
+  var closeStepsBlock = function closeStepsBlock() {
+    blockStepTwo.style.display = "none";
+    blockOffer.style.display = "none";
+    requestContainer.style.display = "none";
+    defaultSelect.checked = true;
+  };
+
+  var saveAndClearFields = function saveAndClearFields() {
+    var person = {
+      name: "",
+      tel: "",
+      email: ""
+    };
+
+    var _iterator = _createForOfIteratorHelper(inputs),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var input = _step.value;
+
+        if (input.type === "email") {
+          person.email = input.value;
+        }
+
+        if (input.type === "text") {
+          person.name = input.value;
+        }
+
+        if (input.type === "tel") {
+          person.tel = input.value;
+        }
+
+        input.value = "";
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    localStorage.setItem("person", JSON.stringify(person));
+  };
 
   var renderStepThree = function renderStepThree(item) {
     requestContainer.style.display = "block";
+    requestId.textContent = "\u2116 00".concat(number);
     target.textContent = item.title;
     sumTitle.textContent = item.names.fieldFullSum;
     years.textContent = item.offer.years;
     sum.textContent = item.offer.sum;
+    name.focus();
 
     if (!item.offer.payment) {
       itemRequest.style.display = "none";
@@ -233,6 +368,56 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     payment.textContent = item.offer.payment;
   };
 
+  var removeErrorClass = function removeErrorClass() {
+    var _iterator2 = _createForOfIteratorHelper(inputs),
+        _step2;
+
+    try {
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var input = _step2.value;
+        input.classList.remove("error");
+      }
+    } catch (err) {
+      _iterator2.e(err);
+    } finally {
+      _iterator2.f();
+    }
+  };
+
+  submitButton.addEventListener("click", function (e) {
+    var isValid = true;
+    e.preventDefault();
+
+    var _iterator3 = _createForOfIteratorHelper(inputs),
+        _step3;
+
+    try {
+      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+        var input = _step3.value;
+
+        if (!input.validity.valid) {
+          input.classList.add("error");
+          input.value = "";
+          isValid = false;
+        }
+      }
+    } catch (err) {
+      _iterator3.e(err);
+    } finally {
+      _iterator3.f();
+    }
+
+    if (isValid) {
+      renderPopupThanks();
+      saveAndClearFields();
+      closeStepsBlock();
+      number++;
+    }
+
+    setTimeout(function () {
+      removeErrorClass();
+    }, Numeral.SECOND);
+  });
   window.stepThree = {
     renderStepThree: renderStepThree
   };
@@ -254,6 +439,31 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 (function () {
+  var SALARY_PERCENT = 45;
+  var Select = {
+    HOUSE: "\u0418\u043F\u043E\u0442\u0435\u043A\u0430",
+    CAR: "\u0410\u0432\u0442\u043E\u043A\u0440\u0435\u0434\u0438\u0442",
+    CREDIT: "\u041F\u043E\u0442\u0440\u0435\u0431\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u043A\u0440\u0435\u0434\u0438\u0442",
+    DEFAULT: "default"
+  };
+  var KeyButton = {
+    FIRST_LITTER: 64,
+    LAST_LITTER: 91,
+    FIRST_SYMBOL: 157,
+    LAST_SYMBOL: 223,
+    SPACE: 32,
+    ENTER: 13,
+    ENTER_NAME: "Enter"
+  };
+  var Numeral = {
+    MONTHS: 12,
+    HUNDRED: 100
+  };
+  var Limit = {
+    MIDDLE: 750000,
+    MAX: 2000000
+  };
+  var requestContainer = document.querySelector(".calculator__request");
   var blockStepTwo = document.querySelector(".calculator__step-two");
   var sumBlock = document.querySelector(".calculator__sum");
   var limit = sumBlock.querySelector("span");
@@ -270,7 +480,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   var rangeYears = blockStepTwo.querySelector("#range-years");
   var fromYears = blockStepTwo.querySelector(".calculator__years-limit span:first-of-type");
   var toYears = blockStepTwo.querySelector(".calculator__years-limit span:last-of-type");
-  var checkboxesLabel = blockStepTwo.querySelectorAll("#checkbox");
+  var checkboxesLabel = blockStepTwo.querySelectorAll("input[type='checkbox'] + label");
+  var checkboxesVisible = blockStepTwo.querySelectorAll("input[type='checkbox'] + label span");
   var checkboxes = blockStepTwo.querySelectorAll("input[type=\"checkbox\"]");
   var blockOffer = document.querySelector(".calculator__offer");
   var sumTitle = blockOffer.querySelector("ul li:first-of-type span:last-of-type");
@@ -291,12 +502,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   var addFirstPayment = function addFirstPayment() {
     var price = +returnClearValue(inputSum.value);
-    var percentPrice = price / 100 * +rangePieceSum.value;
+    var percentPrice = price / Numeral.HUNDRED * +rangePieceSum.value;
     return transformValue(percentPrice.toString());
   };
 
   var addPercentFirstPayment = function addPercentFirstPayment(percentMin) {
-    var newPercent = parseInt(+returnClearValue(fieldPieceSum.value) / +returnClearValue(inputSum.value) * 100, 10);
+    var newPercent = parseInt(+returnClearValue(fieldPieceSum.value) / +returnClearValue(inputSum.value) * Numeral.HUNDRED, 10);
     rangePieceSum.setAttribute("value", percentMin || newPercent);
     rangePieceSum.value = percentMin || newPercent;
     return newPercent;
@@ -307,7 +518,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var lifeInsurance = blockStepTwo.querySelector("#life-insurance");
     var salaryBox = blockStepTwo.querySelector("#salary");
 
-    if (globalItem.title === "\u0410\u0432\u0442\u043E\u043A\u0440\u0435\u0434\u0438\u0442") {
+    if (globalItem.title === Select.CAR) {
       if (insurance.checked && lifeInsurance.checked) {
         return "3.5%";
       }
@@ -316,17 +527,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         return "8.5%";
       }
 
-      return +returnClearValue(inputSum.value) - +returnClearValue(fieldPieceSum.value) < 2000000 ? "16%" : "15%";
+      return +returnClearValue(inputSum.value) - +returnClearValue(fieldPieceSum.value) < Limit.MAX ? "16%" : "15%";
     }
 
-    if (globalItem.title === "\u041F\u043E\u0442\u0440\u0435\u0431\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u043A\u0440\u0435\u0434\u0438\u0442") {
+    if (globalItem.title === Select.CREDIT) {
       var salaryClientRate = salaryBox.checked ? 0.5 : 0;
 
-      if (+returnClearValue(inputSum.value) < 750000) {
+      if (+returnClearValue(inputSum.value) < Limit.MIDDLE) {
         return "".concat(15 - salaryClientRate, "%");
       }
 
-      return +returnClearValue(inputSum.value) < 2000000 ? "".concat(12.5 - salaryClientRate, "%") : "".concat(9.5 - salaryClientRate, "%");
+      return +returnClearValue(inputSum.value) < Limit.MAX ? "".concat(12.5 - salaryClientRate, "%") : "".concat(9.5 - salaryClientRate, "%");
     }
 
     return +rangePieceSum.value >= 15 ? "8.5%" : "9.4%";
@@ -351,17 +562,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     }
 
     var percentRate = returnPercentRate();
-    var amountMonths = +returnClearValue(fieldYears.value) * 12;
-    var percentRateFormula = parseFloat(percentRate, 10) / 100 / 12;
+    var amountMonths = +returnClearValue(fieldYears.value) * Numeral.MONTHS;
+    var percentRateFormula = parseFloat(percentRate, 10) / Numeral.HUNDRED / Numeral.MONTHS;
     var formula = Math.pow(1 + percentRateFormula, amountMonths) - 1;
     var paymentEveryMonth = sum * (percentRateFormula + percentRateFormula / formula);
     everyMonthPayment.textContent = transformValue(paymentEveryMonth.toString());
-    var salary = +returnClearValue(everyMonthPayment.textContent) * (100 / 45);
+    var salary = +returnClearValue(everyMonthPayment.textContent) * (Numeral.HUNDRED / SALARY_PERCENT);
     sumOffer.textContent = transformValue(sum.toString());
     needSalary.textContent = transformValue(salary.toString());
     percentOffer.textContent = percentRate;
     globalItem.offer.sum = inputSum.value;
-    globalItem.offer.payment = globalItem.title === "\u041F\u043E\u0442\u0440\u0435\u0431\u0438\u0442\u0435\u043B\u044C\u0441\u043A\u0438\u0439 \u043A\u0440\u0435\u0434\u0438\u0442" ? null : fieldPieceSum.value;
+    globalItem.offer.payment = globalItem.title === Select.CREDIT ? null : fieldPieceSum.value;
     globalItem.offer.years = fieldYears.value;
   };
 
@@ -452,7 +663,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   };
 
   var onInputKeydown = function onInputKeydown(e) {
-    if (e.keyCode > 64 && e.keyCode < 91 || e.keyCode > 157 && e.keyCode < 223 || e.keyCode === 32) {
+    if (e.keyCode > KeyButton.FIRST_LITTER && e.keyCode < KeyButton.LAST_LITTER || e.keyCode > KeyButton.FIRST_SYMBOL && e.keyCode < KeyButton.LAST_SYMBOL || e.keyCode === KeyButton.SPACE) {
       e.preventDefault();
     }
   };
@@ -485,6 +696,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     renderStepThree(globalItem);
   };
 
+  var onCheckboxKeydown = function onCheckboxKeydown(e) {
+    if (e.keyCode === KeyButton.ENTER || e.key === KeyButton.ENTER_NAME) {
+      e.target.parentElement.control.click();
+    }
+  };
+
   var renderCheckboxes = function renderCheckboxes(title) {
     var _iterator = _createForOfIteratorHelper(checkboxesLabel.entries()),
         _step;
@@ -511,9 +728,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   var renderStepTwo = function renderStepTwo(item) {
     globalItem = item;
-    var firstPayment = (+returnClearValue(item.limits.min) / 100 * item.percent).toString();
+    var firstPayment = (+returnClearValue(item.limits.min) / Numeral.HUNDRED * item.percent).toString();
     blockStepTwo.style.display = "block";
     blockOffer.style.display = "block";
+    requestContainer.style.display = "none";
     pieceSum.style.display = pieceSum.dataset.title === item.title ? "none" : "flex";
     sumFullTitle.textContent = item.names.fieldFullSum;
     limit.textContent = "\u041E\u0442 ".concat(item.limits.min, " \u0434\u043E ").concat(item.limits.max, " \u0440\u0443\u0431\u043B\u0435\u0439");
@@ -539,21 +757,22 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
   var toggleToStepTwo = function toggleToStepTwo(value) {
     switch (value) {
-      case "house":
+      case Select.HOUSE:
         renderStepTwo(targets.house);
         break;
 
-      case "car":
+      case Select.CAR:
         renderStepTwo(targets.car);
         break;
 
-      case "credit":
+      case Select.CREDIT:
         renderStepTwo(targets.credit);
         break;
 
-      case "default":
+      case Select.DEFAULT:
         blockStepTwo.style.display = "none";
         blockOffer.style.display = "none";
+        requestContainer.style.display = "none";
         break;
     }
   };
@@ -570,13 +789,17 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   fieldPieceSum.addEventListener("keydown", onInputKeydown);
   fieldYears.addEventListener("keydown", onInputKeydown);
 
-  var _iterator2 = _createForOfIteratorHelper(checkboxes),
+  var _iterator2 = _createForOfIteratorHelper(checkboxes.entries()),
       _step2;
 
   try {
     for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-      var checkbox = _step2.value;
+      var _step2$value = _slicedToArray(_step2.value, 2),
+          i = _step2$value[0],
+          checkbox = _step2$value[1];
+
       checkbox.addEventListener("change", addInfoOffer);
+      checkboxesVisible[i].addEventListener("keydown", onCheckboxKeydown);
     }
   } catch (err) {
     _iterator2.e(err);

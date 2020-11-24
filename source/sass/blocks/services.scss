@@ -198,6 +198,15 @@
     border-color: transparent;
     cursor: pointer;
 
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+
     @include phones {
       font-size: 14px;
       width: 100%;

@@ -58,6 +58,7 @@ gulp.task('js', () =>
     'source/js/types.js',
     'source/js/utils.js',
     'source/js/slider.js',
+    'source/js/popup-thanks.js',
     'source/js/step-three.js',
     'source/js/step-two.js',
     'source/js/step-one.js'

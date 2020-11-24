@@ -1,0 +1,91 @@
+.thanks {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: rgba($gray, 0.5);
+  z-index: 100;
+}
+
+.thanks__close {
+  display: flex;
+  justify-content: flex-end;
+
+  svg {
+    @include phones {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}
+
+.thanks__wrapper {
+  width: 500px;
+  background: $white;
+  text-align: center;
+  padding: 25px 25px 53px 25px;
+  border-radius: 4px;
+
+  @include tablets {
+    width: 678px;
+    padding: 28px 28px 53px 28px;
+  }
+
+  @include phones {
+    width: 89%;
+    padding: 13px 14px 35px 14px;
+  }
+
+  h2 {
+    font-weight: 500;
+    font-size: 22px;
+    margin: 10px 0 15px 0;
+
+    @include tablets {
+      margin-top: 6px;
+    }
+
+    @include phones {
+      font-size: 18px;
+      width: 80%;
+      margin: 3px auto 13px auto;
+      line-height: 140%;
+    }
+  }
+
+
+  p {
+    font-size: 16px;
+    margin: 0 auto;
+    width: 65%;
+    line-height: 140%;
+
+    @include tablets {
+      width: 50%;
+    }
+
+    @include phones {
+      width: 100%;
+    }
+  }
+
+  button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+}
+

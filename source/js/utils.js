@@ -1,6 +1,15 @@
 'use strict';
 
 (function () {
+  const Year = {
+    ONE: 1,
+    FIVE: 5
+  };
+
+  const Divider = {
+    AFTER_THREE: 3,
+    AFTER_SIX: 6
+  };
 
   const returnClearValue = (sum) => {
     return parseInt(sum.split(` `).join(``), 10).toString();
@@ -13,11 +22,11 @@
 
     year = returnClearValue(year);
 
-    if (+year === 1) {
+    if (+year === Year.ONE) {
       return `${year} год`;
     }
 
-    if (+year > 1 && +year < 5) {
+    if (+year > Year.ONE && +year < Year.FIVE) {
       return `${year} года`;
     }
 
@@ -32,12 +41,12 @@
 
     sum = returnClearValue(sum);
 
-    if (sum.length <= 6 && sum.length > 3) {
-      return `${sum.substring(sum.length - 3, 0)} ${sum.substring(sum.length - 3)} рублей`;
+    if (sum.length <= Divider.AFTER_SIX && sum.length > Divider.AFTER_THREE) {
+      return `${sum.substring(sum.length - Divider.AFTER_THREE, 0)} ${sum.substring(sum.length - Divider.AFTER_THREE)} рублей`;
     }
 
-    if (sum.length > 6) {
-      return `${sum.substring(sum.length - 6, 0)} ${sum.substring(sum.length - 3, sum.length - 6)} ${sum.substring(sum.length - 3)} рублей`;
+    if (sum.length > Divider.AFTER_SIX) {
+      return `${sum.substring(sum.length - Divider.AFTER_SIX, 0)} ${sum.substring(sum.length - Divider.AFTER_THREE, sum.length - Divider.AFTER_SIX)} ${sum.substring(sum.length - Divider.AFTER_THREE)} рублей`;
     }
 
     return `${sum} рублей`;

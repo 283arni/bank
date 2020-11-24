@@ -1,6 +1,36 @@
 'use strict';
 
 (function () {
+  const SALARY_PERCENT = 45;
+
+  const Select = {
+    HOUSE: `Ипотека`,
+    CAR: `Автокредит`,
+    CREDIT: `Потребительский кредит`,
+    DEFAULT: `default`
+  };
+
+  const KeyButton = {
+    FIRST_LITTER: 64,
+    LAST_LITTER: 91,
+    FIRST_SYMBOL: 157,
+    LAST_SYMBOL: 223,
+    SPACE: 32,
+    ENTER: 13,
+    ENTER_NAME: `Enter`
+  };
+
+  const Numeral = {
+    MONTHS: 12,
+    HUNDRED: 100,
+  };
+
+  const Limit = {
+    MIDDLE: 750000,
+    MAX: 2000000
+  };
+
+  const requestContainer = document.querySelector(`.calculator__request`);
   const blockStepTwo = document.querySelector(`.calculator__step-two`);
   const sumBlock = document.querySelector(`.calculator__sum`);
   const limit = sumBlock.querySelector(`span`);
@@ -17,7 +47,8 @@
   const rangeYears = blockStepTwo.querySelector(`#range-years`);
   const fromYears = blockStepTwo.querySelector(`.calculator__years-limit span:first-of-type`);
   const toYears = blockStepTwo.querySelector(`.calculator__years-limit span:last-of-type`);
-  const checkboxesLabel = blockStepTwo.querySelectorAll(`#checkbox`);
+  const checkboxesLabel = blockStepTwo.querySelectorAll(`input[type='checkbox'] + label`);
+  const checkboxesVisible = blockStepTwo.querySelectorAll(`input[type='checkbox'] + label span`);
   const checkboxes = blockStepTwo.querySelectorAll(`input[type="checkbox"]`);
 
   const blockOffer = document.querySelector(`.calculator__offer`);
@@ -42,12 +73,12 @@
 
   const addFirstPayment = () => {
     const price = +returnClearValue(inputSum.value);
-    const percentPrice = (price / 100) * +rangePieceSum.value;
+    const percentPrice = (price / Numeral.HUNDRED) * +rangePieceSum.value;
     return transformValue(percentPrice.toString());
   };
 
   const addPercentFirstPayment = (percentMin) => {
-    const newPercent = parseInt((+returnClearValue(fieldPieceSum.value) / +returnClearValue(inputSum.value)) * 100, 10);
+    const newPercent = parseInt((+returnClearValue(fieldPieceSum.value) / +returnClearValue(inputSum.value)) * Numeral.HUNDRED, 10);
 
     rangePieceSum.setAttribute(`value`, percentMin || newPercent);
     rangePieceSum.value = percentMin || newPercent;
@@ -59,7 +90,7 @@
     const lifeInsurance = blockStepTwo.querySelector(`#life-insurance`);
     const salaryBox = blockStepTwo.querySelector(`#salary`);
 
-    if (globalItem.title === `Автокредит`) {
+    if (globalItem.title === Select.CAR) {
       if (insurance.checked && lifeInsurance.checked) {
         return `3.5%`;
       }
@@ -68,17 +99,17 @@
         return `8.5%`;
       }
 
-      return +returnClearValue(inputSum.value) - +returnClearValue(fieldPieceSum.value) < 2000000 ? `16%` : `15%`;
+      return +returnClearValue(inputSum.value) - +returnClearValue(fieldPieceSum.value) < Limit.MAX ? `16%` : `15%`;
     }
 
-    if (globalItem.title === `Потребительский кредит`) {
+    if (globalItem.title === Select.CREDIT) {
       const salaryClientRate = salaryBox.checked ? 0.5 : 0;
 
-      if (+returnClearValue(inputSum.value) < 750000) {
+      if (+returnClearValue(inputSum.value) < Limit.MIDDLE) {
         return `${15 - salaryClientRate}%`;
       }
 
-      return +returnClearValue(inputSum.value) < 2000000 ? `${12.5 - salaryClientRate}%` : `${9.5 - salaryClientRate}%`;
+      return +returnClearValue(inputSum.value) < Limit.MAX ? `${12.5 - salaryClientRate}%` : `${9.5 - salaryClientRate}%`;
     }
 
     return +rangePieceSum.value >= 15 ? `8.5%` : `9.4%`;
@@ -103,21 +134,21 @@
     }
 
     const percentRate = returnPercentRate();
-    const amountMonths = +returnClearValue(fieldYears.value) * 12;
-    const percentRateFormula = (parseFloat(percentRate, 10) / 100) / 12;
+    const amountMonths = +returnClearValue(fieldYears.value) * Numeral.MONTHS;
+    const percentRateFormula = (parseFloat(percentRate, 10) / Numeral.HUNDRED) / Numeral.MONTHS;
     const formula = Math.pow(1 + percentRateFormula, amountMonths) - 1;
     const paymentEveryMonth = sum * (percentRateFormula + percentRateFormula / formula);
 
     everyMonthPayment.textContent = transformValue(paymentEveryMonth.toString());
 
-    const salary = +returnClearValue(everyMonthPayment.textContent) * (100 / 45);
+    const salary = +returnClearValue(everyMonthPayment.textContent) * (Numeral.HUNDRED / SALARY_PERCENT);
 
     sumOffer.textContent = transformValue(sum.toString());
     needSalary.textContent = transformValue(salary.toString());
     percentOffer.textContent = percentRate;
 
     globalItem.offer.sum = inputSum.value;
-    globalItem.offer.payment = globalItem.title === `Потребительский кредит` ? null : fieldPieceSum.value;
+    globalItem.offer.payment = globalItem.title === Select.CREDIT ? null : fieldPieceSum.value;
     globalItem.offer.years = fieldYears.value;
   };
 
@@ -210,7 +241,7 @@
   };
 
   const onInputKeydown = (e) => {
-    if ((e.keyCode > 64 && e.keyCode < 91) || (e.keyCode > 157 && e.keyCode < 223) || e.keyCode === 32) {
+    if ((e.keyCode > KeyButton.FIRST_LITTER && e.keyCode < KeyButton.LAST_LITTER) || (e.keyCode > KeyButton.FIRST_SYMBOL && e.keyCode < KeyButton.LAST_SYMBOL) || e.keyCode === KeyButton.SPACE) {
       e.preventDefault();
     }
   };
@@ -243,6 +274,12 @@
     renderStepThree(globalItem);
   };
 
+  const onCheckboxKeydown = (e) => {
+    if (e.keyCode === KeyButton.ENTER || e.key === KeyButton.ENTER_NAME) {
+      e.target.parentElement.control.click();
+    }
+  };
+
   const renderCheckboxes = (title) => {
     for (const [i, checkbox] of checkboxesLabel.entries()) {
       checkbox.style.display = `none`;
@@ -256,10 +293,11 @@
 
   const renderStepTwo = (item) => {
     globalItem = item;
-    const firstPayment = ((+returnClearValue(item.limits.min) / 100) * item.percent).toString();
+    const firstPayment = ((+returnClearValue(item.limits.min) / Numeral.HUNDRED) * item.percent).toString();
 
     blockStepTwo.style.display = `block`;
     blockOffer.style.display = `block`;
+    requestContainer.style.display = `none`;
     pieceSum.style.display = pieceSum.dataset.title === item.title ? `none` : `flex`;
 
     sumFullTitle.textContent = item.names.fieldFullSum;
@@ -287,18 +325,19 @@
 
   const toggleToStepTwo = (value) => {
     switch (value) {
-      case `house`:
+      case Select.HOUSE:
         renderStepTwo(targets.house);
         break;
-      case `car`:
+      case Select.CAR:
         renderStepTwo(targets.car);
         break;
-      case `credit`:
+      case Select.CREDIT:
         renderStepTwo(targets.credit);
         break;
-      case `default`:
+      case Select.DEFAULT:
         blockStepTwo.style.display = `none`;
         blockOffer.style.display = `none`;
+        requestContainer.style.display = `none`;
         break;
     }
   };
@@ -316,8 +355,9 @@
   fieldPieceSum.addEventListener(`keydown`, onInputKeydown);
   fieldYears.addEventListener(`keydown`, onInputKeydown);
 
-  for (const checkbox of checkboxes) {
+  for (const [i, checkbox] of checkboxes.entries()) {
     checkbox.addEventListener(`change`, addInfoOffer);
+    checkboxesVisible[i].addEventListener(`keydown`, onCheckboxKeydown);
   }
 
   window.stepTwo = {
