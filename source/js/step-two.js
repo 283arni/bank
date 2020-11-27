@@ -1,6 +1,16 @@
 'use strict';
 
 (function () {
+  const requestContainer = document.querySelector(`.calculator__request`);
+  const blockStepTwo = document.querySelector(`.calculator__step-two`);
+  const blockOffer = document.querySelector(`.calculator__offer`);
+  const blockBack = document.querySelector(`.calculator__back`);
+
+
+  if (!requestContainer || !blockStepTwo || !blockOffer || !blockBack) {
+    return;
+  }
+
   const SALARY_PERCENT = 45;
 
   const Select = {
@@ -30,9 +40,7 @@
     MAX: 2000000
   };
 
-  const requestContainer = document.querySelector(`.calculator__request`);
-  const blockStepTwo = document.querySelector(`.calculator__step-two`);
-  const sumBlock = document.querySelector(`.calculator__sum`);
+  const sumBlock = blockStepTwo.querySelector(`.calculator__sum`);
   const limit = sumBlock.querySelector(`span`);
   const sumWrapper = sumBlock.querySelector(`.calculator__sum-wrapper`);
   const minusButton = sumWrapper.querySelector(`#btn-minus`);
@@ -51,7 +59,6 @@
   const checkboxesVisible = blockStepTwo.querySelectorAll(`input[type='checkbox'] + label span`);
   const checkboxes = blockStepTwo.querySelectorAll(`input[type="checkbox"]`);
 
-  const blockOffer = document.querySelector(`.calculator__offer`);
   const sumTitle = blockOffer.querySelector(`ul li:first-of-type span:last-of-type`);
   const sumOffer = blockOffer.querySelector(`#info-sum`);
   const percentOffer = blockOffer.querySelector(`#info-percent`);
@@ -59,7 +66,6 @@
   const needSalary = blockOffer.querySelector(`#info-salary`);
   const offerButton = blockOffer.querySelector(`button`);
 
-  const blockBack = document.querySelector(`.calculator__back`);
   const textCredit = blockBack.querySelector(`span:first-of-type`);
   const textMoney = blockBack.querySelector(`span:last-of-type`);
 
@@ -67,7 +73,7 @@
   const transformValue = window.utils.transformValue;
   const returnClearValue = window.utils.returnClearValue;
   const transformYears = window.utils.transformYears;
-  const targets = window.types.targets;
+  const targets = window.mocks.targets;
   const renderStepThree = window.stepThree.renderStepThree;
   let globalItem = null;
 

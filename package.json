@@ -19,6 +19,7 @@
     "gulp-postcss": "8.0.x",
     "gulp-posthtml": "^3.0.4",
     "gulp-rename": "^1.4.0",
+    "gulp-replace": "1.0.0",
     "gulp-sass": "4.0.x",
     "gulp-sourcemaps": "2.6.x",
     "gulp-svgstore": "^7.0.1",
@@ -55,6 +56,7 @@
   },
   "dependencies": {
     "del": "^4.1.1",
+    "svgxuse": "1.2.6",
     "swiper": "6.3.5"
   }
 }

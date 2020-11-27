@@ -2,6 +2,11 @@
 
 (function () {
   const calculatorContainer = document.querySelector(`.calculator__step-wrapper`);
+
+  if (!calculatorContainer) {
+    return;
+  }
+
   const buttonOpenSelect = calculatorContainer.querySelector(`button`);
   const labels = calculatorContainer.querySelectorAll(`label`);
   const toggleToStepTwo = window.stepTwo.toggleToStepTwo;

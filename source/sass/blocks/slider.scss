@@ -90,8 +90,7 @@
 
 .slider__slid_first {
   color: $white;
-  background: no-repeat 75.8% 53% url('../img/cards.png'),
-              $blue no-repeat center/cover url('../img/bg-slid.png');
+  background: no-repeat 75.8% 53% url("../img/cards.png"), $blue no-repeat center/cover url("../img/bg-slid.png");
 
   @include tablets {
     background-size: 45%, auto;
@@ -99,14 +98,13 @@
   }
 
   @include phones {
-    background: $blue no-repeat right 58% url('../img/cards-phone.png');
+    background: $blue no-repeat right 58% url("../img/cards-phone.png");
   }
 }
 
 .slider__slid_second {
   padding-bottom: 166px;
-  background: no-repeat center bottom url('../img/men.jpg'),
-              linear-gradient(to right, $light-gray, $light-gray 35%, $pure-white);
+  background: no-repeat center bottom url("../img/men.jpg"), linear-gradient(to right, $light-gray, $light-gray 35%, $pure-white);
 
   @include tablets {
     padding-bottom: 124px;
@@ -127,7 +125,7 @@
 }
 
 .slider__slid_third {
-  background: $gray-blue no-repeat center bottom url('../img/girl.jpg');
+  background: $gray-blue no-repeat center bottom url("../img/girl.jpg");
 
   @include tablets {
     background-size: cover;

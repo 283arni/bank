@@ -1,0 +1,230 @@
+.footer {
+  background: $white;
+  font-size: 12px;
+  color: $gray;
+  padding: 59px 0 60px 0;
+
+  @include phones {
+    padding: 46px 0 43px 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.footer__wrapper {
+  display: flex;
+
+  @include phones {
+    flex-direction: column;
+  }
+}
+
+.footer__info {
+  display: flex;
+  position: relative;
+  width: 53.5%;
+
+  @include tablets {
+    flex-direction: column;
+    width: 55.5%;
+  }
+
+  @include phones {
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  a {
+    font-weight: 500;
+    font-size: 16px;
+    color: $font-main;
+
+    @include phones {
+      font-size: 14px;
+    }
+  }
+
+  nav {
+    @include tablets {
+      order: 2;
+    }
+  }
+
+  ul {
+    @include tablets {
+      margin-bottom: 28px;
+    }
+
+    @include phones {
+      margin-bottom: 0;
+    }
+  }
+
+  li {
+    line-height: 130%;
+
+
+    &:not(:last-of-type) {
+      margin-bottom: 15px;
+
+      @include phones {
+        margin-bottom: 14px;
+      }
+    }
+  }
+}
+
+.footer__logo {
+  width: 59.8%;
+  position: relative;
+  bottom: 9px;
+
+  @include tablets {
+    margin-bottom: 23px;
+    bottom: 6px;
+  }
+
+  @include phones {
+    margin-bottom: 18px;
+  }
+
+  svg:first-of-type {
+    margin-right: 5px;
+
+    @include tablets {
+      width: 24px;
+      height: 21px;
+    }
+
+    @include phones {
+      margin-right: 2px;
+      width: 18px;
+      height: 17px;
+    }
+  }
+
+  svg:last-of-type {
+    @include tablets {
+      width: 100px;
+      height: 15px;
+    }
+
+    @include phones {
+      width: 89px;
+      height: 13px;
+    }
+  }
+}
+
+.footer__address {
+  position: absolute;
+  bottom: 27%;
+  left: 0;
+  width: 50%;
+
+  @include tablets {
+    position: static;
+    order: 3;
+    width: 75%;
+  }
+
+  @include phones {
+    display: none;
+  }
+
+  address {
+    font-style: normal;
+    line-height: 140%;
+    margin-bottom: 3px;
+
+    @include tablets {
+      margin-bottom: 4px;
+    }
+  }
+}
+
+
+.footer__connect {
+  display: flex;
+
+  @include tablets {
+    flex-direction: column;
+  }
+}
+
+.footer__call {
+  @include tablets {
+    width: 100%;
+    margin-bottom: 27px;
+  }
+
+  @include phones {
+    margin-bottom: 22px;
+  }
+
+  &:first-of-type {
+    width: 47.5%;
+
+    @include tablets {
+      width: 100%;
+    }
+  }
+
+  a {
+    padding-left: 28px;
+    display: block;
+    font-weight: 500;
+    font-size: 16px;
+    color: $font-main;
+    margin-bottom: 3px;
+    background: no-repeat left center url("../img/cell-icon.png");
+  }
+
+  a[href="tel:+78001112233"] {
+    background: no-repeat left center url("../img/phone.png");
+  }
+
+  p {
+    padding-left: 28px;
+    width: 75%;
+    color: $gray;
+    margin: 0;
+    line-height: 140%;
+
+    @include tablets {
+      width: 63%;
+    }
+
+    @include phones {
+      width: 70%;
+    }
+  }
+}
+
+.footer__call_offset {
+  @include tablets {
+    a,
+    p {
+      padding-left: 32px;
+    }
+  }
+}
+
+.footer__socials {
+  ul {
+    display: flex;
+    align-items: center;
+  }
+
+  li:not(:first-of-type) {
+    margin-left: 15px;
+
+    @include tablets {
+      margin-left: 20px;
+    }
+  }
+}

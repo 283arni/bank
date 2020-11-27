@@ -17,6 +17,7 @@ var include = require("posthtml-include");
 var del = require("del");
 var concat = require("gulp-concat");
 var babel = require('gulp-babel');
+var replace = require('gulp-replace');
 
 gulp.task("css", function () {
   return gulp.src("source/sass/style.scss")
@@ -53,25 +54,29 @@ gulp.task("map", function(){
   .pipe(gulp.dest('build/js'));
 });
 
-gulp.task('js', () =>
-	gulp.src([
-    'source/js/types.js',
+gulp.task('js', function(){
+  return gulp.src([
+    'source/js/mocks.js',
     'source/js/utils.js',
     'source/js/slider.js',
-    'source/js/popup-thanks.js',
+    'source/js/popup.js',
     'source/js/step-three.js',
     'source/js/step-two.js',
-    'source/js/step-one.js'
+    'source/js/step-one.js',
+    'source/js/map.js',
+    'source/js/scroll.js',
+    'source/js/login.js',
   ])
-		.pipe(sourcemap.init())
-		.pipe(babel({
-			presets: ['@babel/preset-env']
-    }))
-		.pipe(concat('script.js'))
-		.pipe(sourcemap.write('.'))
-    .pipe(gulp.dest('build/js'))
-    .pipe(server.stream())
-);
+  .pipe(sourcemap.init())
+  .pipe(babel({
+    presets: ['@babel/preset-env']
+  }))
+  .pipe(replace("'use strict';", ''))
+  .pipe(concat('script.js'))
+  .pipe(sourcemap.write('.'))
+  .pipe(gulp.dest('build/js'))
+  .pipe(server.stream())
+  });
 
 gulp.task("server", function () {
   server.init({
@@ -129,7 +134,7 @@ gulp.task("html", function () {
 gulp.task("copy", function () {
   return gulp.src([
     "source/fonts/**/*.{woff,woff2}",
-    "source/img/**",
+    "source/img/*.{jpg,png,webp}",
     "source//*.ico"
     ], {
       base: "source"

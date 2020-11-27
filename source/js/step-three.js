@@ -10,6 +10,12 @@
   const blockOffer = document.querySelector(`.calculator__offer`);
   const defaultSelect = document.querySelector(`#option-1`);
   const requestContainer = document.querySelector(`.calculator__request`);
+  const templateThanks = document.querySelector(`#popup-thanks`).content;
+
+  if (!blockStepTwo || !blockOffer || !defaultSelect || !requestContainer || !templateThanks) {
+    return;
+  }
+
   const target = requestContainer.querySelector(`#request-target`);
   const requestId = requestContainer.querySelector(`#request-id`);
   const sum = requestContainer.querySelector(`#request-sum`);
@@ -22,8 +28,10 @@
   const inputs = requestContainer.querySelectorAll(`input`);
   let number = Numeral.FIRST_REQUEST;
 
+  const cloneThanks = templateThanks.querySelector(`.thanks`).cloneNode(true);
 
-  const renderPopupThanks = window.popupThanks.renderPopupThanks;
+  const Popup = window.Popup;
+  const popup = new Popup(cloneThanks);
 
   const closeStepsBlock = () => {
     blockStepTwo.style.display = `none`;
@@ -98,7 +106,7 @@
     }
 
     if (isValid) {
-      renderPopupThanks();
+      popup.openPopup();
       saveAndClearFields();
       closeStepsBlock();
       number++;

@@ -1,5 +1,6 @@
 .services {
   margin-bottom: 100px;
+  height: 503px;
 
   @include tablets {
     width: 100%;
@@ -14,7 +15,6 @@
 }
 
 .services__wrapper {
-
   @include tablets {
     max-width: 100%;
     height: 100%;
@@ -30,7 +30,7 @@
     }
   }
 
-  input[type='radio'] {
+  input[type="radio"] {
     display: none;
   }
 
@@ -57,8 +57,6 @@
     background: $white;
   }
 }
-
-
 
 .services__item {
   background: $white;
@@ -105,7 +103,6 @@
 }
 
 .services__info {
-
   @include phones {
     z-index: 20;
   }
@@ -128,7 +125,7 @@
   }
 
   ul {
-    list-style: url('../img/mark.png');
+    list-style: url("../img/mark.png");
     margin: 0 0 35px 0;
     padding-left: 20px;
 
@@ -138,7 +135,7 @@
 
     @include phones {
       margin-bottom: 25px;
-      list-style: url('../img/mark-phone.png');
+      list-style: url("../img/mark-phone.png");
       padding-left: 16px;
     }
   }
@@ -216,7 +213,6 @@
 }
 
 .services__item_invest {
-
   .services__info {
     width: 44%;
 
@@ -243,7 +239,6 @@
   }
 
   .services__info {
-
     @include tablets {
       width: 43%;
     }
@@ -317,10 +312,6 @@
     padding-top: 54px;
   }
 
-  @include phones {
-
-  }
-
   .services__info {
     width: 45%;
 
@@ -358,10 +349,10 @@
   }
 }
 
-input:checked + label[for='tabs-1'] ~ ul li .services__item_invest,
-input:checked + label[for='tabs-2'] ~ ul li .services__item_credit,
-input:checked + label[for='tabs-3'] ~ ul li .services__item_insurance,
-input:checked + label[for='tabs-4'] ~ ul li .services__item_mobile  {
+input:checked + label[for="tabs-1"] ~ ul li .services__item_invest,
+input:checked + label[for="tabs-2"] ~ ul li .services__item_credit,
+input:checked + label[for="tabs-3"] ~ ul li .services__item_insurance,
+input:checked + label[for="tabs-4"] ~ ul li .services__item_mobile {
   display: flex;
 }
 

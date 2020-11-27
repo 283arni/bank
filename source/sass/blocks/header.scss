@@ -170,12 +170,12 @@
     transform: translateY(-50%);
 
     &::after {
-      content: '';
+      content: "";
       top: 5px;
     }
 
     &::before {
-      content: '';
+      content: "";
       bottom: 5px;
     }
   }
