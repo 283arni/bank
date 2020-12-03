@@ -104,19 +104,7 @@
     }
   }
 
-  a {
-    font-size: 12px;
-    color: $gray;
-    text-align: right;
-    margin-bottom: 28px;
 
-    @include phones {
-      margin-bottom: 0;
-      order: 5;
-      font-size: 14px;
-      text-align: center;
-    }
-  }
 }
 
 .login__header {
@@ -164,6 +152,25 @@
 
     @include phones {
       padding: 0 15px;
+    }
+  }
+}
+
+.login__link {
+  text-align: right;
+  margin-bottom: 28px;
+
+  @include phones {
+    margin-bottom: 0;
+    order: 5;
+    text-align: center;
+  }
+  a {
+    font-size: 12px;
+    color: $gray;
+
+    @include phones {
+      font-size: 14px;
     }
   }
 }

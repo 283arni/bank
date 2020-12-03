@@ -80,6 +80,7 @@
   const addFirstPayment = () => {
     const price = +returnClearValue(inputSum.value);
     const percentPrice = (price / Numeral.HUNDRED) * +rangePieceSum.value;
+    percent.textContent = `${rangePieceSum.value}%`;
     return transformValue(percentPrice.toString());
   };
 
@@ -88,6 +89,7 @@
 
     rangePieceSum.setAttribute(`value`, percentMin || newPercent);
     rangePieceSum.value = percentMin || newPercent;
+    percent.textContent = `${newPercent}%`;
     return newPercent;
   };
 
@@ -105,7 +107,7 @@
         return `8.5%`;
       }
 
-      return +returnClearValue(inputSum.value) - +returnClearValue(fieldPieceSum.value) < Limit.MAX ? `16%` : `15%`;
+      return +returnClearValue(inputSum.value) < Limit.MAX ? `16%` : `15%`;
     }
 
     if (globalItem.title === Select.CREDIT) {
