@@ -117,7 +117,6 @@
     }, Numeral.SECOND);
   });
 
-  window.stepThree = {
-    renderStepThree
-  };
+  window.stepThree = renderStepThree;
+
 })();

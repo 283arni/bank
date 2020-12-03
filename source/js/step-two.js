@@ -74,7 +74,7 @@
   const returnClearValue = window.utils.returnClearValue;
   const transformYears = window.utils.transformYears;
   const targets = window.mocks.targets;
-  const renderStepThree = window.stepThree.renderStepThree;
+  const renderStepThree = window.stepThree;
   let globalItem = null;
 
   const addFirstPayment = () => {
@@ -287,9 +287,12 @@
   };
 
   const renderCheckboxes = (title) => {
-    for (const [i, checkbox] of checkboxesLabel.entries()) {
+    for (const checkbox of checkboxes) {
+      checkbox.checked = false;
+    }
+
+    for (const checkbox of checkboxesLabel) {
       checkbox.style.display = `none`;
-      checkboxes[i].checked = false;
 
       if (checkbox.dataset.title === title) {
         checkbox.style.display = `flex`;
@@ -361,9 +364,12 @@
   fieldPieceSum.addEventListener(`keydown`, onInputKeydown);
   fieldYears.addEventListener(`keydown`, onInputKeydown);
 
-  for (const [i, checkbox] of checkboxes.entries()) {
+  for (const checkbox of checkboxes) {
     checkbox.addEventListener(`change`, addInfoOffer);
-    checkboxesVisible[i].addEventListener(`keydown`, onCheckboxKeydown);
+  }
+
+  for (const checkbox of checkboxesVisible) {
+    checkbox.addEventListener(`keydown`, onCheckboxKeydown);
   }
 
   window.stepTwo = {

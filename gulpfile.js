@@ -69,7 +69,18 @@ gulp.task('js', function(){
   ])
   .pipe(sourcemap.init())
   .pipe(babel({
-    presets: ['@babel/preset-env']
+    "presets": [
+      [
+        "@babel/env",
+        {
+          "targets": {
+            "ie": "11"
+          },
+          "useBuiltIns": "usage",
+          "corejs": "3.6.5",
+        }
+      ]
+    ]
   }))
   .pipe(replace("'use strict';", ''))
   .pipe(concat('script.js'))

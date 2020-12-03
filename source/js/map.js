@@ -82,10 +82,13 @@
     const onCheckboxesChange = () => {
       const boxesChecked = checkContainer.querySelectorAll(`.branches__check input[type='checkbox']:checked`);
 
-      for (const [i, city] of cities.entries()) {
-        myMap.geoObjects.remove(marks[i]);
+      for (const mark of marks) {
+        myMap.geoObjects.remove(mark);
+      }
+
+      for (let i = 0; i < cities.length; i++) {
         for (const checkbox of boxesChecked) {
-          if (checkbox.value === city.title) {
+          if (checkbox.value === cities[i].title) {
             myMap.geoObjects.add(marks[i]);
           }
         }
