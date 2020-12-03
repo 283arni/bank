@@ -79,16 +79,6 @@
         }
       });
 
-<<<<<<< HEAD
-      for (const mark of marks) {
-        myMap.geoObjects.remove(mark);
-      }
-
-      for (let i = 0; i < cities.length; i++) {
-        for (const checkbox of boxesChecked) {
-          if (checkbox.value === cities[i].title) {
-            myMap.geoObjects.add(marks[i]);
-=======
       myMap.controls.add(`geolocationControl`, {
         position: {
           left: `auto`,
@@ -109,7 +99,6 @@
             if (checkbox.value === city.title) {
               myMap.geoObjects.add(marks[i]);
             }
->>>>>>> second
           }
         }
       };
