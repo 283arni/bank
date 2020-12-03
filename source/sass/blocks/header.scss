@@ -55,13 +55,21 @@
       }
     }
   }
+
+  &.container {
+    @include desktop {
+      margin: 0 7.3% 0 4.5%;
+      max-width: none;
+    }
+  }
+
 }
 
 .header__logo {
   position: relative;
-  right: 38px;
+  // right: 38px;
   bottom: 3px;
-  margin-right: 19px;
+  margin-right: 56px;
 
   @include tablets {
     right: 0;
@@ -210,6 +218,10 @@
     @include phones {
       flex-direction: column;
     }
+  }
+
+  li {
+    line-height: 150%;
   }
 
   li:not(:last-of-type) {

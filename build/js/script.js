@@ -202,10 +202,38 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 (function () {
+  var KeyButton = {
+    ENTER: 13,
+    ENTER_NAME: "Enter"
+  };
   var Swiper = window.Swiper;
 
   if (!Swiper) {
     return;
+  }
+
+  var servicesLabels = document.querySelectorAll(".services__wrapper label");
+
+  var _iterator = _createForOfIteratorHelper(servicesLabels),
+      _step;
+
+  try {
+    var _loop = function _loop() {
+      var label = _step.value;
+      label.addEventListener("keydown", function (e) {
+        if (e.keyCode === KeyButton.ENTER || e.key === KeyButton.ENTER_NAME) {
+          label.click();
+        }
+      });
+    };
+
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      _loop();
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
   }
 
   var slider = document.querySelector(".slider");
@@ -236,18 +264,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     services.classList.add("swiper-container");
     wrapper.classList.add("swiper-wrapper");
 
-    var _iterator = _createForOfIteratorHelper(items),
-        _step;
+    var _iterator2 = _createForOfIteratorHelper(items),
+        _step2;
 
     try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var item = _step.value;
+      for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+        var item = _step2.value;
         item.classList.add("swiper-slide");
       }
     } catch (err) {
-      _iterator.e(err);
+      _iterator2.e(err);
     } finally {
-      _iterator.f();
+      _iterator2.f();
     }
 
     swiperTabs = new Swiper(services, {
@@ -641,6 +669,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   var addFirstPayment = function addFirstPayment() {
     var price = +returnClearValue(inputSum.value);
     var percentPrice = price / Numeral.HUNDRED * +rangePieceSum.value;
+    percent.textContent = "".concat(rangePieceSum.value, "%");
     return transformValue(percentPrice.toString());
   };
 
@@ -648,6 +677,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var newPercent = parseInt(+returnClearValue(fieldPieceSum.value) / +returnClearValue(inputSum.value) * Numeral.HUNDRED, 10);
     rangePieceSum.setAttribute("value", percentMin || newPercent);
     rangePieceSum.value = percentMin || newPercent;
+    percent.textContent = "".concat(newPercent, "%");
     return newPercent;
   };
 
@@ -665,7 +695,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         return "8.5%";
       }
 
-      return +returnClearValue(inputSum.value) - +returnClearValue(fieldPieceSum.value) < Limit.MAX ? "16%" : "15%";
+      return +returnClearValue(inputSum.value) < Limit.MAX ? "16%" : "15%";
     }
 
     if (globalItem.title === Select.CREDIT) {
@@ -1013,18 +1043,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     ENTER: 13,
     ENTER_NAME: "Enter"
   };
-  var ymaps = window.ymaps;
-  var mapBlock = document.querySelector("#branches");
-
-  if (!mapBlock) {
-    return;
-  }
-
-  ymaps.ready(init);
-  var checkContainer = mapBlock.querySelector(".branches__check");
-  var checkboxes = checkContainer.querySelectorAll("label span");
-  var mapContainer = mapBlock.querySelector("#map");
-  var cities = window.mocks.cities;
   var locationMark = {
     icon: "img/location.png",
     size: [35, 40],
@@ -1037,99 +1055,119 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     locationMark.offset = [-14, -33];
   }
 
-  var onCheckboxKeydown = function onCheckboxKeydown(e) {
-    if (e.keyCode === KeyButton.ENTER || e.key === KeyButton.ENTER_NAME) {
-      e.target.parentElement.control.click();
+  var cities = window.mocks.cities;
+  setTimeout(function () {
+    var elem = document.createElement("script");
+    elem.src = "https://api-maps.yandex.ru/2.1/?apikey=bcbda5be-152e-4e0e-962c-8eb3b84f36b6&lang=ru_RU&&load=package.map";
+    document.querySelector("#popup-login").after(elem);
+  }, 2000);
+  setTimeout(function () {
+    var ymaps = window.ymaps;
+    var mapBlock = document.querySelector("#branches");
+
+    if (!mapBlock) {
+      return;
     }
-  };
 
-  function init() {
-    var marks = cities.map(function (city) {
-      return new ymaps.Placemark([city.coords, city.coords2], {}, {
-        iconLayout: "default#image",
-        iconImageHref: locationMark.icon,
-        iconImageSize: locationMark.size,
-        iconImageOffset: locationMark.offset
-      });
-    });
-    var myMap = new ymaps.Map(mapContainer, {
-      center: [55.76, 37.64],
-      zoom: 4,
-      controls: []
-    });
-    myMap.controls.add("zoomControl", {
-      size: "small",
-      position: {
-        left: "auto",
-        right: 10,
-        bottom: 195,
-        top: "auto"
-      }
-    });
-    myMap.controls.add("geolocationControl", {
-      position: {
-        left: "auto",
-        right: 10,
-        bottom: 150,
-        top: "auto"
-      }
-    });
-    myMap.behaviors.disable("scrollZoom");
+    ymaps.ready(init);
+    var checkContainer = mapBlock.querySelector(".branches__check");
+    var checkboxes = checkContainer.querySelectorAll("label span");
+    var mapContainer = mapBlock.querySelector("#map");
 
-    var onCheckboxesChange = function onCheckboxesChange() {
-      var boxesChecked = checkContainer.querySelectorAll(".branches__check input[type='checkbox']:checked");
-
-      var _iterator = _createForOfIteratorHelper(cities.entries()),
-          _step;
-
-      try {
-        for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var _step$value = _slicedToArray(_step.value, 2),
-              i = _step$value[0],
-              city = _step$value[1];
-
-          myMap.geoObjects.remove(marks[i]);
-
-          var _iterator2 = _createForOfIteratorHelper(boxesChecked),
-              _step2;
-
-          try {
-            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
-              var checkbox = _step2.value;
-
-              if (checkbox.value === city.title) {
-                myMap.geoObjects.add(marks[i]);
-              }
-            }
-          } catch (err) {
-            _iterator2.e(err);
-          } finally {
-            _iterator2.f();
-          }
-        }
-      } catch (err) {
-        _iterator.e(err);
-      } finally {
-        _iterator.f();
+    var onCheckboxKeydown = function onCheckboxKeydown(e) {
+      if (e.keyCode === KeyButton.ENTER || e.key === KeyButton.ENTER_NAME) {
+        e.target.parentElement.control.click();
       }
     };
 
-    checkContainer.addEventListener("change", onCheckboxesChange);
+    function init() {
+      var marks = cities.map(function (city) {
+        return new ymaps.Placemark([city.coords, city.coords2], {}, {
+          iconLayout: "default#image",
+          iconImageHref: locationMark.icon,
+          iconImageSize: locationMark.size,
+          iconImageOffset: locationMark.offset
+        });
+      });
+      var myMap = new ymaps.Map(mapContainer, {
+        center: [55.76, 37.64],
+        zoom: 4,
+        controls: []
+      });
+      myMap.controls.add("zoomControl", {
+        size: "small",
+        position: {
+          left: "auto",
+          right: 10,
+          bottom: 195,
+          top: "auto"
+        }
+      });
+      myMap.controls.add("geolocationControl", {
+        position: {
+          left: "auto",
+          right: 10,
+          bottom: 150,
+          top: "auto"
+        }
+      });
+      myMap.behaviors.disable("scrollZoom");
 
-    var _iterator3 = _createForOfIteratorHelper(checkboxes),
-        _step3;
+      var onCheckboxesChange = function onCheckboxesChange() {
+        var boxesChecked = checkContainer.querySelectorAll(".branches__check input[type='checkbox']:checked");
 
-    try {
-      for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-        var box = _step3.value;
-        box.addEventListener("keydown", onCheckboxKeydown);
+        var _iterator = _createForOfIteratorHelper(cities.entries()),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var _step$value = _slicedToArray(_step.value, 2),
+                i = _step$value[0],
+                city = _step$value[1];
+
+            myMap.geoObjects.remove(marks[i]);
+
+            var _iterator2 = _createForOfIteratorHelper(boxesChecked),
+                _step2;
+
+            try {
+              for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                var checkbox = _step2.value;
+
+                if (checkbox.value === city.title) {
+                  myMap.geoObjects.add(marks[i]);
+                }
+              }
+            } catch (err) {
+              _iterator2.e(err);
+            } finally {
+              _iterator2.f();
+            }
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      };
+
+      checkContainer.addEventListener("change", onCheckboxesChange);
+
+      var _iterator3 = _createForOfIteratorHelper(checkboxes),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var box = _step3.value;
+          box.addEventListener("keydown", onCheckboxKeydown);
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
       }
-    } catch (err) {
-      _iterator3.e(err);
-    } finally {
-      _iterator3.f();
     }
-  }
+  }, 3000);
 })();
 
 

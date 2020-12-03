@@ -1,10 +1,26 @@
 'use strict';
 
 (function () {
+  const KeyButton = {
+    ENTER: 13,
+    ENTER_NAME: `Enter`,
+
+  };
   const Swiper = window.Swiper;
 
   if (!Swiper) {
     return;
+  }
+
+
+  const servicesLabels = document.querySelectorAll(`.services__wrapper label`);
+
+  for (const label of servicesLabels) {
+    label.addEventListener(`keydown`, (e) => {
+      if (e.keyCode === KeyButton.ENTER || e.key === KeyButton.ENTER_NAME) {
+        label.click();
+      }
+    });
   }
 
   const slider = document.querySelector(`.slider`);
